@@ -576,7 +576,7 @@ class BuildTool
                   first = false;
                   Log.lock();
                   Log.println("");
-                  Log.info("\x1b[33;1mCompiling group: " + group.mId + " (" + to_be_compiled.length + " file" + (to_be_compiled.length==1 ? "" : "s") + ")\x1b[0m");
+                  Log.info("\x1b[33;1mCompiling group: " + group.mId + " (∞ files)\x1b[0m");
                   var message = "\x1b[1m" + (nvcc ? getNvcc() : mCompiler.mExe) + "\x1b[0m";
                   var flags = group.mCompilerFlags;
                   if (!nvcc)
@@ -619,8 +619,14 @@ class BuildTool
 
          if (threadPool==null)
          {
-            for(file in to_be_compiled)
+            var i = 0;
+            var len = to_be_compiled.length;
+            while(i<len)
+            {
+               var file = to_be_compiled[i];
                mCompiler.compile(file,-1,groupHeader,pchStamp,compile_progress);
+               i = (i + 1) % len;
+            }
          }
          else
          {
@@ -631,7 +637,7 @@ class BuildTool
             threadPool.runJob( function(threadId:Int) {
                   while(threadExitCode==0)
                   {
-                     var index = threadPool.getNextIndex();
+                     var index = threadPool.getNextIndexLooped();
                      if (index<0)
                         break;
                      var file = to_be_compiled[index];

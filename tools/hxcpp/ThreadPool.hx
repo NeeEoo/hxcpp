@@ -19,11 +19,11 @@ class ThreadPool
 {
    var threads:Array<Thread>;
    var mainThread:Thread;
-   #if cpp
-   var arrayIndex:AtomicInt;
-   #else
+   //#if cpp
+   //var arrayIndex:AtomicInt;
+   //#else
    var arrayIndex:Int;
-   #end
+   //#end
    var arrayCount:Int;
 
    public var mutex:Mutex;
@@ -73,15 +73,43 @@ class ThreadPool
       arrayIndex = 0;
       arrayCount = inCount;
    }
+
+   public function setArrayIndex(inIndex:Int)
+   {
+      //#if cpp
+//
+      //#else
+      mutex.acquire();
+      arrayIndex = inIndex;
+      mutex.release();
+      //#end
+   }
+
    public function getNextIndex() : Int
    {
-       #if cpp
-       var index = AtomicInt.atomicInc( cpp.Pointer.addressOf(arrayIndex) );
-       #else
+       //#if cpp
+       //var index = AtomicInt.atomicInc( cpp.Pointer.addressOf(arrayIndex) );
+       //#else
        mutex.acquire();
        var index = arrayIndex++;
        mutex.release();
-       #end
+       //#end
+
+       if (index<arrayCount)
+          return index;
+       return -1;
+   }
+
+   public function getNextIndexLooped() : Int
+   {
+       //#if cpp
+       //var index = AtomicInt.atomicInc( cpp.Pointer.addressOf(arrayIndex) );
+       //#else
+       mutex.acquire();
+       var index = arrayIndex;
+       arrayIndex = (arrayIndex+1) % arrayCount;
+       mutex.release();
+       //#end
 
        if (index<arrayCount)
           return index;
