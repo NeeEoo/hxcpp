@@ -418,6 +418,62 @@ public:
       return base->__push(Dynamic(inVal));
    }
 
+   template<typename T1, typename T2>
+   inline int push(const T1 &inVal1, const T2 &inVal2)
+   {
+      if (store!=hx::arrayFixed) {
+         EnsureStorage(inVal1);
+         EnsureStorage(inVal2);
+      }
+      return base->__push(Dynamic(inVal1),Dynamic(inVal2));
+   }
+   template<typename T1, typename T2, typename T3>
+   inline int push(const T1 &inVal1, const T2 &inVal2, const T3 &inVal3)
+   {
+      if (store!=hx::arrayFixed) {
+         EnsureStorage(inVal1);
+         EnsureStorage(inVal2);
+         EnsureStorage(inVal3);
+      }
+      return base->__push(Dynamic(inVal1),Dynamic(inVal2),Dynamic(inVal3));
+   }
+   template<typename T1, typename T2, typename T3, typename T4>
+   inline int push(const T1 &inVal1, const T2 &inVal2, const T3 &inVal3, const T4 &inVal4)
+   {
+      if (store!=hx::arrayFixed) {
+         EnsureStorage(inVal1);
+         EnsureStorage(inVal2);
+         EnsureStorage(inVal3);
+         EnsureStorage(inVal4);
+      }
+      return base->__push(Dynamic(inVal1),Dynamic(inVal2),Dynamic(inVal3),Dynamic(inVal4));
+   }
+   template<typename T1, typename T2, typename T3, typename T4, typename T5>
+   inline int push(const T1 &inVal1, const T2 &inVal2, const T3 &inVal3, const T4 &inVal4, const T5 &inVal5)
+   {
+      if (store!=hx::arrayFixed) {
+         EnsureStorage(inVal1);
+         EnsureStorage(inVal2);
+         EnsureStorage(inVal3);
+         EnsureStorage(inVal4);
+         EnsureStorage(inVal5);
+      }
+      return base->__push(Dynamic(inVal1),Dynamic(inVal2),Dynamic(inVal3),Dynamic(inVal4),Dynamic(inVal5));
+   }
+   template<typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
+   inline int push(const T1 &inVal1, const T2 &inVal2, const T3 &inVal3, const T4 &inVal4, const T5 &inVal5, const T6 &inVal6)
+   {
+      if (store!=hx::arrayFixed) {
+         EnsureStorage(inVal1);
+         EnsureStorage(inVal2);
+         EnsureStorage(inVal3);
+         EnsureStorage(inVal4);
+         EnsureStorage(inVal5);
+         EnsureStorage(inVal6);
+      }
+      return base->__push(Dynamic(inVal1),Dynamic(inVal2),Dynamic(inVal3),Dynamic(inVal4),Dynamic(inVal5),Dynamic(inVal6));
+   }
+
 
    template<typename T>
    inline VirtualArray_obj *Add(const T &inVal)

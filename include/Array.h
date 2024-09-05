@@ -255,6 +255,11 @@ public:
    virtual ::String __join(::String a0) = 0;
    virtual Dynamic __pop() = 0;
    virtual int __push(const Dynamic &a0) = 0;
+   virtual int __push(const Dynamic &a0, const Dynamic &a1) = 0;
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2) = 0;
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2, const Dynamic &a3) = 0;
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2, const Dynamic &a3, const Dynamic &a4) = 0;
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2, const Dynamic &a3, const Dynamic &a4, const Dynamic &a5) = 0;
    virtual bool __contains(const Dynamic &a0) = 0;
    virtual bool __remove(const Dynamic &a0) = 0;
    virtual bool __removeAt(int inIndex) = 0;
@@ -599,6 +604,61 @@ public:
       if (hx::ContainsPointers<ELEM_>()) { HX_ARRAY_WB(this,inIdx, hx::PointerOf(inVal) ); }
       return length;
    }
+   inline int pushCtx(hx::StackContext *_hx_ctx, ELEM_ inVal1, ELEM_ inVal2 )
+   {
+      int l = length;
+      EnsureSize((int)l+2);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      if (hx::ContainsPointers<ELEM_>()) { HX_ARRAY_WB(this,inIdx, hx::PointerOf(inVal1), hx::PointerOf(inVal2) ); }
+      return length;
+   }
+   inline int pushCtx(hx::StackContext *_hx_ctx, ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3 )
+   {
+      int l = length;
+      EnsureSize((int)l+3);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      if (hx::ContainsPointers<ELEM_>()) { HX_ARRAY_WB(this,inIdx, hx::PointerOf(inVal1), hx::PointerOf(inVal2), hx::PointerOf(inVal3) ); }
+      return length;
+   }
+   inline int pushCtx(hx::StackContext *_hx_ctx, ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3, ELEM_ inVal4 )
+   {
+      int l = length;
+      EnsureSize((int)l+4);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      * (ELEM_ *)(mBase + (l+3)*sizeof(ELEM_)) = inVal4;
+      if (hx::ContainsPointers<ELEM_>()) { HX_ARRAY_WB(this,inIdx, hx::PointerOf(inVal1), hx::PointerOf(inVal2), hx::PointerOf(inVal3), hx::PointerOf(inVal4) ); }
+      return length;
+   }
+   inline int pushCtx(hx::StackContext *_hx_ctx, ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3, ELEM_ inVal4, ELEM_ inVal5 )
+   {
+      int l = length;
+      EnsureSize((int)l+5);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      * (ELEM_ *)(mBase + (l+3)*sizeof(ELEM_)) = inVal4;
+      * (ELEM_ *)(mBase + (l+4)*sizeof(ELEM_)) = inVal5;
+      if (hx::ContainsPointers<ELEM_>()) { HX_ARRAY_WB(this,inIdx, hx::PointerOf(inVal1), hx::PointerOf(inVal2), hx::PointerOf(inVal3), hx::PointerOf(inVal4), hx::PointerOf(inVal5) ); }
+      return length;
+   }
+   inline int pushCtx(hx::StackContext *_hx_ctx, ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3, ELEM_ inVal4, ELEM_ inVal5, ELEM_ inVal6 )
+   {
+      int l = length;
+      EnsureSize((int)l+6);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      * (ELEM_ *)(mBase + (l+3)*sizeof(ELEM_)) = inVal4;
+      * (ELEM_ *)(mBase + (l+4)*sizeof(ELEM_)) = inVal5;
+      * (ELEM_ *)(mBase + (l+5)*sizeof(ELEM_)) = inVal6;
+      if (hx::ContainsPointers<ELEM_>()) { HX_ARRAY_WB(this,inIdx, hx::PointerOf(inVal1), hx::PointerOf(inVal2), hx::PointerOf(inVal3), hx::PointerOf(inVal4), hx::PointerOf(inVal5), hx::PointerOf(inVal6) ); }
+      return length;
+   }
    #endif
 
 
@@ -612,6 +672,77 @@ public:
       int l = length;
       EnsureSize((int)l+1);
       * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal;
+      return length;
+   }
+
+    inline int push( ELEM_ inVal1, ELEM_ inVal2 )
+   {
+      #ifdef HXCPP_GC_GENERATIONAL
+      if (hx::ContainsPointers<ELEM_>())
+         return pushCtx(HX_CTX_GET,inVal1,inVal2);
+      #endif
+      int l = length;
+      EnsureSize((int)l+2);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      return length;
+   }
+   inline int push( ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3 )
+   {
+      #ifdef HXCPP_GC_GENERATIONAL
+      if (hx::ContainsPointers<ELEM_>())
+         return pushCtx(HX_CTX_GET,inVal1,inVal2,inVal3);
+      #endif
+      int l = length;
+      EnsureSize((int)l+3);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      return length;
+   }
+   inline int push( ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3, ELEM_ inVal4 )
+   {
+      #ifdef HXCPP_GC_GENERATIONAL
+      if (hx::ContainsPointers<ELEM_>())
+         return pushCtx(HX_CTX_GET,inVal1,inVal2,inVal3,inVal4);
+      #endif
+      int l = length;
+      EnsureSize((int)l+4);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      * (ELEM_ *)(mBase + (l+3)*sizeof(ELEM_)) = inVal4;
+      return length;
+   }
+   inline int push( ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3, ELEM_ inVal4, ELEM_ inVal5 )
+   {
+      #ifdef HXCPP_GC_GENERATIONAL
+      if (hx::ContainsPointers<ELEM_>())
+         return pushCtx(HX_CTX_GET,inVal1,inVal2,inVal3,inVal4,inVal5);
+      #endif
+      int l = length;
+      EnsureSize((int)l+5);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      * (ELEM_ *)(mBase + (l+3)*sizeof(ELEM_)) = inVal4;
+      * (ELEM_ *)(mBase + (l+4)*sizeof(ELEM_)) = inVal5;
+      return length;
+   }
+   inline int push( ELEM_ inVal1, ELEM_ inVal2, ELEM_ inVal3, ELEM_ inVal4, ELEM_ inVal5, ELEM_ inVal6 )
+   {
+      #ifdef HXCPP_GC_GENERATIONAL
+      if (hx::ContainsPointers<ELEM_>())
+         return pushCtx(HX_CTX_GET,inVal1,inVal2,inVal3,inVal4,inVal5,inVal6);
+      #endif
+      int l = length;
+      EnsureSize((int)l+6);
+      * (ELEM_ *)(mBase + l*sizeof(ELEM_)) = inVal1;
+      * (ELEM_ *)(mBase + (l+1)*sizeof(ELEM_)) = inVal2;
+      * (ELEM_ *)(mBase + (l+2)*sizeof(ELEM_)) = inVal3;
+      * (ELEM_ *)(mBase + (l+3)*sizeof(ELEM_)) = inVal4;
+      * (ELEM_ *)(mBase + (l+4)*sizeof(ELEM_)) = inVal5;
+      * (ELEM_ *)(mBase + (l+5)*sizeof(ELEM_)) = inVal6;
       return length;
    }
    inline NullType pop( )
@@ -838,6 +969,11 @@ public:
    virtual ::String __join(::String a0) { return join(a0); }
    virtual Dynamic __pop() { return pop(); }
    virtual int __push(const Dynamic &a0) { return push(a0);}
+   virtual int __push(const Dynamic &a0, const Dynamic &a1) { return push(a0,a1); }
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2) { return push(a0,a1,a2); }
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2, const Dynamic &a3) { return push(a0,a1,a2,a3); }
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2, const Dynamic &a3, const Dynamic &a4) { return push(a0,a1,a2,a3,a4); }
+   virtual int __push(const Dynamic &a0, const Dynamic &a1, const Dynamic &a2, const Dynamic &a3, const Dynamic &a4, const Dynamic &a5) { return push(a0,a1,a2,a3,a4,a5); }
    virtual bool __contains(const Dynamic &a0) { return contains(a0); }
    virtual bool __remove(const Dynamic &a0) { return remove(a0); }
    virtual bool __removeAt(int inIndex) { return removeAt(inIndex); }
