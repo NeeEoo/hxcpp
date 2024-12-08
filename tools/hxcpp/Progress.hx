@@ -20,8 +20,6 @@ class Progress {
 		if (Std.int(pct) == pct) {
 			str += ".0";
 		}
-		while (str.length < 4)
-			str = " " + str;
 		return "[" + str + "%]";
 	}
 }
